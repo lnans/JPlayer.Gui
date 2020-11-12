@@ -1,3 +1,13 @@
 {
-  "message": "hello i18n !!"
+    "login": {
+        "title": "Login",
+        "forgot_password": "Forgot password ?",
+        "contact_admin": "Contact the administrator",
+        "username": "User Name",
+        "password": "Password",
+        "login_button": "Login"
+    },
+    "rules": {
+        "required": "Required"
+    }
 }
