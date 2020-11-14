@@ -2,13 +2,13 @@
     <v-app>
         <v-main>
             <div id="login">
-                <div class="login-container">
+                <div class="login-container" >
                     <p class="login__title">{{ $t('login.title') }} </p>
                     <p class="login__subtitle"> {{ $t('login.forgot_password') }} <br /> {{ $t('login.contact_admin') }} </p>
                     <v-form v-model="valid" :disabled="loading">
                         <v-text-field
                             outlined
-                            v-model="loginForm.userName"
+                            v-model="loginForm.login"
                             :label="$t('login.username')"
                             append-icon="fa-user"
                             :rules="[rules.required]">
@@ -48,7 +48,7 @@ export default {
             showPwd: false,
             loading: false,
             loginForm: {
-                userName: "",
+                login: "",
                 password: ""
             },
             rules: {
@@ -59,6 +59,14 @@ export default {
     methods: {
         submit () {
             this.loading = true
+            this.axios.post(`auth/signin`, this.loginForm)
+                .then(() => {
+                    // Redirect to home
+                    this.loading = false
+                })
+                .catch(() => {
+                    this.loading = false
+                })
         }
     }
 }

@@ -4,6 +4,5 @@
 <style lang="sass">
 @import './styles/font.sass'
 @import './styles/variables.sass'
-#app
-    font-family: 'Lato', sans-serif
+@import './styles/style.sass'
 </style>
