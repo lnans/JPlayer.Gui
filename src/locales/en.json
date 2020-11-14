@@ -9,5 +9,8 @@
     },
     "rules": {
         "required": "Required"
+    },
+    "errors": {
+        "authAuthenticationFailed": "Incorrect credentials"
     }
 }

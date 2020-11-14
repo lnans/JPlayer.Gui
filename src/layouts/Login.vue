@@ -1,42 +1,38 @@
 <template>
-    <v-app>
-        <v-main>
-            <div id="login">
-                <div class="login-container" >
-                    <p class="login__title">{{ $t('login.title') }} </p>
-                    <p class="login__subtitle"> {{ $t('login.forgot_password') }} <br /> {{ $t('login.contact_admin') }} </p>
-                    <v-form v-model="valid" :disabled="loading">
-                        <v-text-field
-                            outlined
-                            v-model="loginForm.login"
-                            :label="$t('login.username')"
-                            append-icon="fa-user"
-                            :rules="[rules.required]">
-                        </v-text-field>
-                        <v-text-field
-                            outlined
-                            v-model="loginForm.password"
-                            :label="$t('login.password')"
-                            :append-icon="showPwd ? 'fa-eye' : 'fa-eye-slash'"
-                            :type="showPwd ? 'text' : 'password'"
-                            :rules="[rules.required]"
-                            @click:append="showPwd = !showPwd">
-                        </v-text-field>
-                        <v-btn
-                            large
-                            class="login__btn"
-                            color="primary"
-                            width="100%"
-                            :disabled="!valid"
-                            :loading="loading"
-                            @click="submit()">
-                            {{ $t('login.login_button') }}
-                        </v-btn>
-                    </v-form>
-                </div>
-            </div>
-        </v-main>
-    </v-app>
+    <div id="login">
+        <div class="login-container" >
+            <p class="login__title">{{ $t('login.title') }} </p>
+            <p class="login__subtitle"> {{ $t('login.forgot_password') }} <br /> {{ $t('login.contact_admin') }} </p>
+            <v-form v-model="valid" :disabled="loading">
+                <v-text-field
+                    outlined
+                    v-model="loginForm.login"
+                    :label="$t('login.username')"
+                    append-icon="fa-user"
+                    :rules="[rules.required]">
+                </v-text-field>
+                <v-text-field
+                    outlined
+                    v-model="loginForm.password"
+                    :label="$t('login.password')"
+                    :append-icon="showPwd ? 'fa-eye' : 'fa-eye-slash'"
+                    :type="showPwd ? 'text' : 'password'"
+                    :rules="[rules.required]"
+                    @click:append="showPwd = !showPwd">
+                </v-text-field>
+                <v-btn
+                    large
+                    class="login__btn"
+                    color="primary"
+                    width="100%"
+                    :disabled="!valid"
+                    :loading="loading"
+                    @click="submit()">
+                    {{ $t('login.login_button') }}
+                </v-btn>
+            </v-form>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -56,13 +52,15 @@ export default {
             }
         }
     },
+    mounted () {
+    },
     methods: {
         submit () {
             this.loading = true
-            this.axios.post(`auth/signin`, this.loginForm)
+            this.$http.post(`auth/signin`, this.loginForm)
                 .then(() => {
                     // Redirect to home
-                    this.loading = false
+                    this.$router.push('/')
                 })
                 .catch(() => {
                     this.loading = false

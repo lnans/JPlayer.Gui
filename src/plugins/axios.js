@@ -36,7 +36,7 @@ _axios.interceptors.response.use(
     if(error.response.status === 401 && window.location.pathname !== process.env.VUE_APP_LOGIN_PAGE) {
         window.location = process.env.VUE_APP_LOGIN_PAGE
     } else {
-        console.error(error.response.data.error)
+        Vue.prototype.$toaster.error(error.response.data.error)
     }
 
     return Promise.reject(error.response);
@@ -47,7 +47,7 @@ Plugin.install = function(Vue) {
   Vue.axios = _axios;
   window.axios = _axios;
   Object.defineProperties(Vue.prototype, {
-    axios: {
+    $http: {
       get() {
         return _axios;
       }

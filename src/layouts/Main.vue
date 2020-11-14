@@ -1,11 +1,9 @@
 <template>
-  <v-app>
-      <router-view :key="$route.fullPath" />
-  </v-app>
+    <router-view :key="$route.fullPath" />
 </template>
 
 <script>
 export default {
-  name: 'Main'
+    name: 'Main'
 }
 </script>
