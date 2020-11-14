@@ -1,11 +1,13 @@
 <template>
     <div id="toaster" v-if="!!toaster">
-        <div :class="`toast_message toast_${message.type}`" class="toast_message" v-for="(message, idx) in toaster.messages" :key="idx">
-            <p class="toast_content">{{ $t(`errors.${message.value}`) }}</p>
-            <v-btn icon class="toast_close" @click="close(message.id)">
-                <v-icon>fa-times</v-icon>
-            </v-btn>
-        </div>
+        <transition-group name="toast" tag="div" class="toast_container">
+            <div v-for="(message, idx) in toaster.messages" :key="idx" :class="`toast_message toast_${message.type}`">
+                <p class="toast_content">{{ $t(`errors.${message.value}`) }}</p>
+                <v-btn icon class="toast_close" @click="close(message.id)">
+                    <v-icon>fa-times</v-icon>
+                </v-btn>
+            </div>
+        </transition-group>
     </div>
 </template>
 
@@ -42,12 +44,15 @@ export default {
     align-items: center;
     flex-direction: column;
 }
+.toast_container {
+    width: 100%;
+    max-width: 380px;
+}
 .toast_message {
     color: $toaster-default-color;
     background-color: $toaster-default-bg-color;
     min-height: 45px;
     width: 100%;
-    max-width: 380px;
     border-radius: 5px;
     margin: 5px 0 5px 0;
     padding: 10px;
@@ -79,5 +84,11 @@ export default {
 }
 .toast_error {
     background-color: $toaster-error-bg-color;
+}
+.toast-leave-active {
+  transition: all 0.3s;
+}
+.toast-leave-to {
+  opacity: 0;
 }
 </style>

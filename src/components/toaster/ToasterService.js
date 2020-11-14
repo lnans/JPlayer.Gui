@@ -1,5 +1,5 @@
 class ToasterService {
-    _timeout = 5000
+    _timeout = 3000
 
     constructor () {
         this._messages = []
