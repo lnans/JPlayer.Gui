@@ -1,15 +1,23 @@
 import Vue from 'vue'
-import i18n from './i18n'
-import './plugins/axios'
 import App from './App.vue'
-import router from './router'
+
+// Import plugins
+import './plugins/axios'
+import i18n from './plugins/i18n'
 import vuetify from './plugins/vuetify';
+import router from './plugins/router'
+
+// Import services
+import ToasterService from './components/toaster/ToasterService'
+import UserService from './services/UserService'
+
+// Import libs
 import '@babel/polyfill'
 import '@fortawesome/fontawesome-free/css/all.css'
-import ToasterService from './components/toaster/ToasterService'
 
+// Register services as prototypes
 Vue.prototype.$toaster = ToasterService
-Vue.config.productionTip = false
+Vue.prototype.$user = UserService
 
 new Vue({
   router,
