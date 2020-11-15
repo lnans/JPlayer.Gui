@@ -46,7 +46,7 @@
                     </v-menu>
                 </div>
                 <!-- Update user info dialog -->
-                <v-dialog v-model="updateUser" width="500">
+                <v-dialog v-model="updateUser" width="500" @click:outside="closeUserForm()">
                     <v-card>
                         <v-card-title class="grey lighten-2">{{ $t('update_user_form.title') }}</v-card-title>
                         <v-card-text class="update_user_form">
@@ -163,6 +163,11 @@ export default {
                     this.$user.functions = response.data.functions
                     this.connected = true
                 })
+        },
+        closeUserForm () {
+            this.updateUserForm.data.currentPassword = ''
+            this.updateUserForm.data.newPassword = ''
+            this.updateUserForm.data.retypePassword = ''
         }
     }
 }

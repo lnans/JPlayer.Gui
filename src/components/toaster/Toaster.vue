@@ -1,7 +1,7 @@
 <template>
     <div id="toaster" v-if="!!toaster">
         <transition-group name="toast" tag="div" class="toast_container">
-            <div v-for="(message, idx) in toaster.messages" :key="idx" :class="`toast_message toast_${message.type}`">
+            <div v-for="message in toaster.messages" :key="message.id" :class="`toast_message toast_${message.type}`">
                 <p class="toast_content">{{ $t(message.value) }}</p>
                 <v-btn icon class="toast_close" @click="close(message.id)">
                     <v-icon>fa-times</v-icon>
