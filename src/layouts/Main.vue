@@ -22,7 +22,7 @@
             <!-- App bar -->
             <div class="app_bar">
                 <div class="app_breadcrumb">
-                    <p>BreadCrumb</p>
+                    <BreadCrumb></BreadCrumb>
                 </div>
                 <!-- User info -->
                 <div class="app_user">
@@ -101,8 +101,10 @@
 </template>
 
 <script>
+import BreadCrumb from '../components/breadcrumb/BreadCrumb.vue'
 export default {
     name: 'Main',
+    components: { BreadCrumb },
     data () {
         return {
             connected: false,

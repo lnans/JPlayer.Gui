@@ -16,12 +16,12 @@ const routes = [
         children: [
             {
                 path: '',
-                name: 'Dashboard',
+                name: 'dashboard',
                 component: () => import('@/views/Dashboard.vue')
             },
             {
                 path: 'admin',
-                name: 'Admin',
+                name: 'admin',
                 component: () => import('@/views/Admin.vue')
             }
         ]
