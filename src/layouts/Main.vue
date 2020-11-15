@@ -175,7 +175,6 @@ export default {
 
 <style lang="scss" scoped>
 #main {
-    background-color: #C8C8C8;
     height: 100%;
     width: 100%;
     display: flex;
@@ -192,6 +191,9 @@ export default {
     display: flex;
     width: 100%;
     flex-direction: column;
+    .app_content {
+        margin: 0;
+    }
     .app_bar {
         display: flex;
         flex-direction: row;
@@ -236,9 +238,6 @@ export default {
                 }
             }
         }
-    }
-    .app_content {
-        margin: 10px 10px 0 10px;
     }
 }
 .update_user_form {
