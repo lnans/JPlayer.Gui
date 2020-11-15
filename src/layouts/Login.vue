@@ -58,8 +58,10 @@ export default {
         submit () {
             this.loading = true
             this.$http.post(`auth/signin`, this.loginForm)
-                .then(() => {
+                .then((response) => {
                     // Redirect to home
+                    this.$user.login = response.data.login
+                    this.$user.functions = response.data.functions
                     this.$router.push('/')
                 })
                 .catch(() => {

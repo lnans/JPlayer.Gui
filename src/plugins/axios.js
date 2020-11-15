@@ -33,7 +33,8 @@ _axios.interceptors.response.use(
     // Do something with response error
     // In case of 401, redirect to login page
     // If the error come from the login page, display the error
-    if(error.response.status === 401 && window.location.pathname !== process.env.VUE_APP_LOGIN_PAGE) {
+    const errCode = error.response.data.error;
+    if(error.response.status === 401 && errCode === 'authNotAuthenticated') {
         window.location = process.env.VUE_APP_LOGIN_PAGE
     } else {
         Vue.prototype.$toaster.error(error.response.data.error)

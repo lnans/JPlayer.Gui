@@ -23,6 +23,11 @@ class UserService {
     hasFunction(func) {
         return this._functions.includes(func)
     }
+
+    clear () {
+        this._login = ''
+        this._functions = []
+    }
 }
 
 export default new UserService()

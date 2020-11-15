@@ -7,10 +7,20 @@
         "password": "Password",
         "login_button": "Login"
     },
+    "update_user_form": {
+        "title": "Password update",
+        "current_password": "Current password",
+        "new_password": "New password",
+        "retype_password": "Confirme the password",
+        "update_successfully": "Password updated"
+    },
+    "form": {
+        "validate": "Validate",
+        "save": "Save"
+    },
     "rules": {
         "required": "Required"
     },
-    "errors": {
-        "authAuthenticationFailed": "Incorrect credentials"
-    }
+    "authAuthenticationFailed": "Incorrect credentials",
+    "authWrongPassword": "Wrong password"
 }
