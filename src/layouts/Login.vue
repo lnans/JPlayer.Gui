@@ -52,8 +52,6 @@ export default {
             }
         }
     },
-    mounted () {
-    },
     methods: {
         submit () {
             this.loading = true

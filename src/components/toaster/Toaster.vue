@@ -1,12 +1,16 @@
 <template>
-    <div id="toaster" v-if="!!toaster">
-        <transition-group name="toast" tag="div" class="toast_container">
-            <div v-for="message in toaster.messages" :key="message.id" :class="`toast_message toast_${message.type}`">
-                <p class="toast_content">{{ $t(message.value) }}</p>
-                <v-btn icon class="toast_close" @click="close(message.id)">
-                    <v-icon>fa-times</v-icon>
-                </v-btn>
-            </div>
+    <div id="toaster">
+        <transition-group name="toast" tag="div" class="toast__container">
+            <v-alert
+                class="toast__message"
+                v-for="message in toaster.messages"
+                :key="message.id"
+                dismissible
+                border="left"
+                :type="message.type"
+                @input="close(message.id)">
+                {{ $t(message.value) }}
+            </v-alert>
         </transition-group>
     </div>
 </template>
@@ -16,7 +20,7 @@ export default {
     name: 'Toaster',
     data () {
         return {
-            toaster: null
+            toaster: {}
         }
     },
     beforeMount () {
@@ -32,10 +36,10 @@ export default {
 
 <style lang="scss" scoped>
 #toaster {
-    display: flex;
+    position: fixed;
     height: 100vh;
     width: 100vw;
-    position: fixed;
+    display: flex;
     z-index: 1000;
     top: 0;
     left: 0;
@@ -43,47 +47,14 @@ export default {
     justify-content: flex-end;
     align-items: center;
     flex-direction: column;
-}
-.toast_container {
-    width: 100%;
-    max-width: 380px;
-}
-.toast_message {
-    color: $toaster-default-color;
-    background-color: $toaster-default-bg-color;
-    min-height: 45px;
-    width: 100%;
-    border-radius: 5px;
-    margin: 5px 0 5px 0;
-    padding: 10px;
-    pointer-events: auto;
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    font-weight: 600;
-    .toast_content {
-        margin: 0;
-        padding: 0 15px 0 15px;
-        display: flex;
-        align-self: center;
+    .toast__container {
+        width: 100%;
+        max-width: 380px;
     }
-    .toast_close {
-        cursor: pointer;
-        align-self: baseline;
-        color: $toaster-default-color !important;
+    .toast__message {
+        margin: 5px 0 5px 0;
+        pointer-events: auto;
     }
-}
-.toast_success {
-    background-color: $toaster-sucess-bg-color;
-}
-.toast_info {
-    background-color: $toaster-info-bg-color;
-}
-.toast_warning {
-    background-color: $toaster-warning-bg-color;
-}
-.toast_error {
-    background-color: $toaster-error-bg-color;
 }
 .toast-leave-active {
   transition: all 0.3s;

@@ -30,7 +30,7 @@ class ToasterService {
     }
 
     toast (message, level) {
-        const id = new Date().toISOString()
+        const id = new Date().toISOString() + Math.random().toString()
         this._messages.push({
             id: id,
             type: level,
