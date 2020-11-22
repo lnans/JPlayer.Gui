@@ -33,7 +33,7 @@ _axios.interceptors.response.use(
         if (!error.status) {
             // Unhandled exception
             console.error(error)
-            Vue.prototype.$toaster.error('networkError')
+            window.location = process.env.VUE_APP_ERROR_PAGE
             return Promise.reject(error.response);
         }
 

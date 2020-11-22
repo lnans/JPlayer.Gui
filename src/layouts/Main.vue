@@ -1,6 +1,18 @@
 <template>
-    <div id="main" v-if="connected">
-        <!-- Side menu -->
+    <v-app>
+        <v-main>
+            <v-fade-transition mode="out-in">
+                <v-container fluid id="app_main" v-if="!connected" v-bind:class="`d-flex col-8 col-${breakpoint}-8 d-${breakpoint}-flex flex-column justify-center justify-${breakpoint}-center`">
+                    <v-progress-linear class="align-self-center" indeterminate color="primary" />
+                    <p class="align-self-center ma-2"><i>{{ $t('loading') }}</i></p>
+                </v-container>
+            </v-fade-transition>
+            <v-container fluid id="app_main" v-if="connected">
+                <v-card>HOME</v-card>
+            </v-container>
+        </v-main>
+    </v-app>
+    <!-- <div id="main" v-if="connected">
         <v-navigation-drawer permanent dark class="app_navigation">
             <v-list-item class="px-2 app_title">
                 <v-list-item-title>JPlayer</v-list-item-title>
@@ -17,16 +29,13 @@
                 </v-list-item>
             </v-list>
         </v-navigation-drawer>
-        <!-- Main container -->
         <div class="app_container">
-            <!-- App bar -->
             <div class="app_bar">
                 <div class="app_breadcrumb">
                     <BreadCrumb></BreadCrumb>
                 </div>
-                <!-- User info -->
                 <div class="app_user">
-                    <v-divider vertical class="theme--dark"></v-divider>
+                    <v-divider vertical class="themedark"></v-divider>
                     <v-menu offset-y attach=".app_user" content-class="app_user__menu" min-width="240" nudge-left="180px" :close-on-content-click="false">
                         <template v-slot:activator="{ on, attrs }">
                             <v-btn dark v-bind="attrs" v-on="on" width="60" height="60" icon>
@@ -36,7 +45,7 @@
                         <v-list class="app_user__list">
                             <v-divider horizontal dark></v-divider>
                             <v-list-item class="app_user__list-item">
-                                <v-list-item-title class="app_user__list-item--title">
+                                <v-list-item-title class="app_user__list-itemtitle">
                                     <p class="user_login">{{ $user.login }}</p>
                                     <v-btn icon dark @click="updateUser = true"><v-icon size="15">fa-cog</v-icon></v-btn>
                                     <v-btn icon dark @click="signOut()"><v-icon size="15">fa-power-off</v-icon></v-btn>
@@ -45,7 +54,6 @@
                         </v-list>
                     </v-menu>
                 </div>
-                <!-- Update user info dialog -->
                 <v-dialog v-model="updateUser" width="500" @click:outside="closeUserForm()">
                     <v-card>
                         <v-card-title class="grey lighten-2">{{ $t('update_user_form.title') }}</v-card-title>
@@ -92,19 +100,18 @@
                     </v-card>
                 </v-dialog>
             </div>
-            <!-- Curent context -->
             <div class="app_content">
                 <router-view :key="$route.fullPath" />
             </div>
         </div>
-    </div>
+    </div> -->
 </template>
 
 <script>
-import BreadCrumb from '../components/breadcrumb/BreadCrumb.vue'
+// import BreadCrumb from '../components/breadcrumb/BreadCrumb.vue'
 export default {
     name: 'Main',
-    components: { BreadCrumb },
+    // components: { BreadCrumb },
     data () {
         return {
             connected: false,
@@ -141,6 +148,11 @@ export default {
     mounted () {
         this.getUserInfo()
     },
+    computed: {
+        breakpoint () {
+            return this.$vuetify.breakpoint.name
+        }
+    },
     methods: {
         signOut () {
             this.$http.delete('auth/signout')
@@ -174,73 +186,71 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#main {
+#app_main {
     height: 100%;
-    width: 100%;
-    display: flex;
 }
-.app_navigation {
-    min-width: 230px;
-    // background-color: $app-components-bg-color;
-    .app_title {
-        height: 60px;
-        text-align: center;
-    }
-}
-.app_container {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    .app_content {
-        margin: 0;
-    }
-    .app_bar {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        height: 60px;
-        width: 100%;
-        // background-color: $app-components-bg-color;
-        .app_breadcrumb {
-            // color: $app-components-font-color;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding-left: 10px;
-            width: auto;
-        }
-        .app_user {
-            display: flex;
-            width: 61px;
-            .app_user__menu {
-                border-top-left-radius: 0;
-                border-top-right-radius: 0;
-                border-bottom-right-radius: 0;
-            }
-            .app_user__list {
-                // background-color: $app-components-bg-color;
-                padding: 0;
-                .app_user__list-item {
-                    padding-right: 10px;
-                    height: 60px;
-                }
-                .app_user__list-item--title {
-                    // color: $app-components-font-color;
-                    display: flex;
-                    justify-content: flex-end;
-                    .user_login {
-                        margin: 0;
-                        align-self: center;
-                        font-weight: 600;
-                        line-height: 10px;
-                        padding-right: 10px;
-                    }
-                }
-            }
-        }
-    }
-}
-.update_user_form {
-    padding-top: 20px !important;
-}
+// .app_navigation {
+//     min-width: 230px;
+//     // background-color: $app-components-bg-color;
+//     .app_title {
+//         height: 60px;
+//         text-align: center;
+//     }
+// }
+// .app_container {
+//     display: flex;
+//     width: 100%;
+//     flex-direction: column;
+//     .app_content {
+//         margin: 0;
+//     }
+//     .app_bar {
+//         display: flex;
+//         flex-direction: row;
+//         justify-content: space-between;
+//         height: 60px;
+//         width: 100%;
+//         // background-color: $app-components-bg-color;
+//         .app_breadcrumb {
+//             // color: $app-components-font-color;
+//             display: flex;
+//             flex-direction: column;
+//             justify-content: center;
+//             padding-left: 10px;
+//             width: auto;
+//         }
+//         .app_user {
+//             display: flex;
+//             width: 61px;
+//             .app_user__menu {
+//                 border-top-left-radius: 0;
+//                 border-top-right-radius: 0;
+//                 border-bottom-right-radius: 0;
+//             }
+//             .app_user__list {
+//                 // background-color: $app-components-bg-color;
+//                 padding: 0;
+//                 .app_user__list-item {
+//                     padding-right: 10px;
+//                     height: 60px;
+//                 }
+//                 .app_user__list-item--title {
+//                     // color: $app-components-font-color;
+//                     display: flex;
+//                     justify-content: flex-end;
+//                     .user_login {
+//                         margin: 0;
+//                         align-self: center;
+//                         font-weight: 600;
+//                         line-height: 10px;
+//                         padding-right: 10px;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
+// .update_user_form {
+//     padding-top: 20px !important;
+// }
 </style>

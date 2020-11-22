@@ -1,5 +1,6 @@
 {
     "app_name": "JPlayer",
+    "loading": "Loading...",
     "login": {
         "title": "Login",
         "forgot_password": "Forgot password ?",

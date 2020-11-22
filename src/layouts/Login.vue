@@ -65,6 +65,10 @@ export default {
             }
         }
     },
+    mounted () {
+        console.log(this)
+        console.log(this.$test)
+    },
     computed: {
         breakpoint () {
             return this.$vuetify.breakpoint.name

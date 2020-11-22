@@ -10,6 +10,11 @@ const routes = [
         component: () => import('@/layouts/Login.vue')
     },
     {
+        path: '/error',
+        name: 'Error',
+        component: () => import('@/layouts/Error.vue')
+    },
+    {
         path: '/',
         name: '',
         component: () => import('@/layouts/Main.vue'),
