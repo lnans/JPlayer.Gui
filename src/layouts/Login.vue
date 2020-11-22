@@ -1,42 +1,62 @@
 <template>
-    <div id="login">
-        <div class="login-container" >
-            <p class="login__title">{{ $t('login.title') }} </p>
-            <p class="login__subtitle"> {{ $t('login.forgot_password') }} <br /> {{ $t('login.contact_admin') }} </p>
-            <v-form v-model="valid" :disabled="loading">
-                <v-text-field
-                    outlined
-                    v-model="loginForm.login"
-                    :label="$t('login.username')"
-                    append-icon="fa-user"
-                    :rules="[rules.required]">
-                </v-text-field>
-                <v-text-field
-                    outlined
-                    v-model="loginForm.password"
-                    :label="$t('login.password')"
-                    :append-icon="showPwd ? 'fa-eye' : 'fa-eye-slash'"
-                    :type="showPwd ? 'text' : 'password'"
-                    :rules="[rules.required]"
-                    @click:append="showPwd = !showPwd">
-                </v-text-field>
-                <v-btn
-                    large
-                    class="login__btn"
-                    color="primary"
-                    width="100%"
-                    :disabled="!valid"
-                    :loading="loading"
-                    @click="submit()">
-                    {{ $t('login.login_button') }}
-                </v-btn>
-            </v-form>
-        </div>
-    </div>
+    <v-app>
+        <v-main>
+            <v-container fluid id="app_root" class="d-flex justify-center">
+                <v-card class="col-2 align-self-center">
+                    <v-card-title class="text-h4">{{ $t('login.title') }}</v-card-title>
+                    <v-card-subtitle>{{ $t('login.forgot_password') }} <br /> {{ $t('login.contact_admin') }}</v-card-subtitle>
+                    <v-card-text>
+                        <v-text-field
+                            outlined
+                            v-model="loginForm.login"
+                            :label="$t('login.username')"
+                            append-icon="fa-user"
+                            :rules="[rules.required]">
+                        </v-text-field>
+                    </v-card-text>
+                </v-card>
+                <!-- <div class="login-container align-self-center">
+                    <p class="login__title">{{ $t('login.title') }} </p>
+                    <p class="login__subtitle"> {{ $t('login.forgot_password') }} <br /> {{ $t('login.contact_admin') }} </p>
+                    <v-form v-model="valid" :disabled="loading">
+                        <v-text-field
+                            outlined
+                            v-model="loginForm.login"
+                            :label="$t('login.username')"
+                            append-icon="fa-user"
+                            :rules="[rules.required]">
+                        </v-text-field>
+                        <v-text-field
+                            outlined
+                            v-model="loginForm.password"
+                            :label="$t('login.password')"
+                            :append-icon="showPwd ? 'fa-eye' : 'fa-eye-slash'"
+                            :type="showPwd ? 'text' : 'password'"
+                            :rules="[rules.required]"
+                            @click:append="showPwd = !showPwd">
+                        </v-text-field>
+                        <v-btn
+                            large
+                            class="login__btn"
+                            color="primary"
+                            width="100%"
+                            :disabled="!valid"
+                            :loading="loading"
+                            @click="submit()">
+                            {{ $t('login.login_button') }}
+                        </v-btn>
+                    </v-form>
+                </div> -->
+            </v-container>
+            <Toaster />
+        </v-main>
+    </v-app>
 </template>
 
 <script>
+import Toaster from '../components/toaster/Toaster.vue'
 export default {
+    components: { Toaster },
     name: 'Login',
     data () {
         return {
@@ -71,13 +91,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#login {
-    background-color: #C8C8C8;
+#app_root {
+    // background-color: $app-default-bg-color;
     height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    max-height: 100%;
 }
 .login-container {
     background-color: #FFFFFF;

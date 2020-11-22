@@ -50,7 +50,7 @@ export default {
 }
 .admin_cards {
     display: block;
-    background-color: $app-default-bg-color;
+    // background-color: $app-default-bg-color;
     float: left;
     width: 370px;
     height: 180px;
@@ -60,13 +60,13 @@ export default {
         margin: 0;
     }
     .admin_cards--title {
-        color: $app-components-font-color;
+        // color: $app-components-font-color;
         padding: 25px 30px 25px 30px;
         font-weight: 600;
         font-size: 20px;
     }
     .admin_cards--content {
-        color: $app-components-font-color;
+        // color: $app-components-font-color;
         padding: 15px 30px 0 30px;
         display: flex;
         flex-direction: row;
@@ -88,7 +88,7 @@ export default {
         .admin_cards--icon {
             align-self: flex-end;
             .v-icon {
-                color: $app-components-font-color;
+                // color: $app-components-font-color;
             }
         }
     }

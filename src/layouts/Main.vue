@@ -181,7 +181,7 @@ export default {
 }
 .app_navigation {
     min-width: 230px;
-    background-color: $app-components-bg-color;
+    // background-color: $app-components-bg-color;
     .app_title {
         height: 60px;
         text-align: center;
@@ -200,9 +200,9 @@ export default {
         justify-content: space-between;
         height: 60px;
         width: 100%;
-        background-color: $app-components-bg-color;
+        // background-color: $app-components-bg-color;
         .app_breadcrumb {
-            color: $app-components-font-color;
+            // color: $app-components-font-color;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -218,14 +218,14 @@ export default {
                 border-bottom-right-radius: 0;
             }
             .app_user__list {
-                background-color: $app-components-bg-color;
+                // background-color: $app-components-bg-color;
                 padding: 0;
                 .app_user__list-item {
                     padding-right: 10px;
                     height: 60px;
                 }
                 .app_user__list-item--title {
-                    color: $app-components-font-color;
+                    // color: $app-components-font-color;
                     display: flex;
                     justify-content: flex-end;
                     .user_login {

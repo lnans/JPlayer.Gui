@@ -13,7 +13,6 @@ import UserService from './services/UserService'
 
 // Import libs
 import '@babel/polyfill'
-import '@fortawesome/fontawesome-free/css/all.css'
 
 // Register services as prototypes
 Vue.prototype.$toaster = ToasterService
