@@ -1,4 +1,5 @@
 {
+    "app_name": "JPlayer",
     "login": {
         "title": "Login",
         "forgot_password": "Forgot password ?",
@@ -26,5 +27,6 @@
         "required": "Required"
     },
     "authAuthenticationFailed": "Incorrect credentials",
-    "authWrongPassword": "Wrong password"
+    "authWrongPassword": "Wrong password",
+    "networkError": "Unable to contact the server"
 }
