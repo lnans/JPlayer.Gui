@@ -18,6 +18,9 @@ import '@babel/polyfill'
 Vue.prototype.$toaster = ToasterService
 Vue.prototype.$user = UserService
 
+// Shortcut to get current breakpoint in vues
+Object.defineProperties(Vue.prototype, { $breakpoint: { get() { return this.$vuetify.breakpoint.name } }, })
+
 new Vue({
   router,
   i18n,

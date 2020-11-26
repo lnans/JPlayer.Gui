@@ -1,10 +1,10 @@
 <template>
     <v-app>
         <v-main>
-            <v-container fluid id="app_root" v-bind:class="`d-flex d-${breakpoint}-flex flex-column justify-center justify-${breakpoint}-center`">
-                <v-card v-bind:class="`login-card col-3 col-${breakpoint}-3 align-self-center align-self-${breakpoint}-center`" :dark="$vuetify.theme.isDark">
+            <v-container fluid id="app_root" v-bind:class="`d-flex d-${$breakpoint}-flex flex-column justify-center justify-${$breakpoint}-center`">
+                <v-card v-bind:class="`login-card col-3 col-${$breakpoint}-3 align-self-center align-self-${$breakpoint}-center`" :dark="$vuetify.theme.isDark">
                     <v-card-title>
-                        <p v-bind:class="`text-center text-h4 text-${breakpoint}-h4 col-12 col-${breakpoint}-12 ma-0`">{{ $t('app_name') }}</p>
+                        <p v-bind:class="`text-center text-h4 text-${$breakpoint}-h4 col-12 col-${$breakpoint}-12 ma-0`">{{ $t('app_name') }}</p>
                     </v-card-title>
                     <v-card-text>
                         <v-form ref="loginForm" v-model="valid" :disabled="loading">
@@ -68,11 +68,6 @@ export default {
     mounted () {
         console.log(this)
         console.log(this.$test)
-    },
-    computed: {
-        breakpoint () {
-            return this.$vuetify.breakpoint.name
-        }
     },
     methods: {
         submit () {
