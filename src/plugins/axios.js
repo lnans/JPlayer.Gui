@@ -30,7 +30,7 @@ _axios.interceptors.response.use(
         return response.data;
     },
     function(error) {
-        if (!error.status) {
+        if (!error.response) {
             // Unhandled exception
             console.error(error)
             window.location = process.env.VUE_APP_ERROR_PAGE
