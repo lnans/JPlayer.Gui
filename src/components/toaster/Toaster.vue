@@ -8,7 +8,8 @@
                 dismissible
                 border="left"
                 :type="message.type"
-                @input="close(message.id)">
+                @input="close(message.id)"
+            >
                 {{ $t(message.value) }}
             </v-alert>
         </transition-group>
@@ -17,21 +18,21 @@
 
 <script>
 export default {
-    name: 'Toaster',
-    data () {
+    name: "Toaster",
+    data() {
         return {
-            toaster: {}
-        }
+            toaster: {},
+        };
     },
-    beforeMount () {
-        this.toaster = this.$toaster
+    beforeMount() {
+        this.toaster = this.$toaster;
     },
     methods: {
-        close (id) {
-            this.toaster.remove(id)
-        }
-    }
-}
+        close(id) {
+            this.toaster.remove(id);
+        },
+    },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -57,9 +58,9 @@ export default {
     }
 }
 .toast-leave-active {
-  transition: all 0.3s;
+    transition: all 0.3s;
 }
 .toast-leave-to {
-  opacity: 0;
+    opacity: 0;
 }
 </style>

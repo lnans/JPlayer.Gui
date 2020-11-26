@@ -1,22 +1,22 @@
 class UserService {
-    constructor () {
+    constructor() {
         this._login = ''
         this._functions = []
     }
 
-    get login () {
+    get login() {
         return this._login
     }
 
-    set login (login) {
+    set login(login) {
         this._login = login
     }
 
-    get functions () {
+    get functions() {
         return this._functions
     }
 
-    set functions (functions) {
+    set functions(functions) {
         this._functions = functions
     }
 
@@ -24,7 +24,7 @@ class UserService {
         return this._functions.includes(func)
     }
 
-    clear () {
+    clear() {
         this._login = ''
         this._functions = []
     }
