@@ -1,45 +1,47 @@
 <template>
     <v-app>
         <v-main>
-            <v-container fluid id="app_root" v-bind:class="`d-flex d-${$breakpoint}-flex flex-column justify-center justify-${$breakpoint}-center`">
-                <v-card v-bind:class="`login-card col-3 col-${$breakpoint}-3 align-self-center align-self-${$breakpoint}-center`" :dark="$vuetify.theme.isDark">
-                    <v-card-title>
-                        <p v-bind:class="`text-center text-h4 text-${$breakpoint}-h4 col-12 col-${$breakpoint}-12 ma-0`">{{ $t('app_name') }}</p>
-                    </v-card-title>
-                    <v-card-text>
-                        <v-form ref="loginForm" v-model="valid" :disabled="loading">
-                            <v-text-field
-                                outlined
-                                v-model="loginForm.login"
-                                :label="$t('login.username')"
-                                append-icon="fa-user"
-                                :rules="[rules.required]"
-                                @keyup.enter="submit()">
-                            </v-text-field>
-                            <v-text-field
-                                outlined
-                                v-model="loginForm.password"
-                                :label="$t('login.password')"
-                                :append-icon="showPwd ? 'fa-eye' : 'fa-eye-slash'"
-                                :type="showPwd ? 'text' : 'password'"
-                                :rules="[rules.required]"
-                                @click:append="showPwd = !showPwd"
-                                @keyup.enter="submit()">
-                            </v-text-field>
-                            <p>{{ $t('login.forgot_password') }} <br /> {{ $t('login.contact_admin') }}</p>
-                            <v-btn
-                                large
-                                class="login__btn"
-                                color="primary"
-                                width="100%"
-                                :disabled="!valid"
-                                :loading="loading"
-                                @click="submit()">
-                                {{ $t('login.login_button') }}
-                            </v-btn>
-                        </v-form>
-                    </v-card-text>
-                </v-card>
+            <v-container fluid class="container__login pa-0">
+                <div class="login">
+                    <div class="login__title">
+                        <p>Login</p>
+                        <div class="underline primary"></div>
+                    </div>
+                    <p class="login__subtitle">{{ $t('login.welcome')}} <b>{{ $t('app_name')}}</b><br/>{{ $t('login.enter_credentials') }}</p>
+                    <v-form ref="loginForm" v-model="valid" :disabled="loading">
+                        <v-text-field
+                            outlined
+                            v-model="loginForm.login"
+                            :height="45"
+                            :label="$t('login.username')"
+                            append-icon="fa-user"
+                            :rules="[rules.required]"
+                            @keyup.enter="submit()">
+                        </v-text-field>
+                        <v-text-field
+                            outlined
+                            v-model="loginForm.password"
+                            :label="$t('login.password')"
+                            :append-icon="showPwd ? 'fa-eye' : 'fa-eye-slash'"
+                            :type="showPwd ? 'text' : 'password'"
+                            :rules="[rules.required]"
+                            @click:append="showPwd = !showPwd"
+                            @keyup.enter="submit()">
+                        </v-text-field>
+                        <v-btn
+                            large
+                            elevation="0"
+                            class="login__btn"
+                            color="primary"
+                            height="45px"
+                            width="100%"
+                            :disabled="!valid"
+                            :loading="loading"
+                            @click="submit()">
+                            {{ $t('login.login_button') }}
+                        </v-btn>
+                    </v-form>
+                </div>
             </v-container>
             <Toaster />
         </v-main>
@@ -92,10 +94,47 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#app_root {
-    height: 100%;
+.container__login {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
 }
-.login-card {
-    min-width: 250px;
+.login {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 360px;
+    height: 470px;
+    padding: 90px 25px 50px 25px;
+    box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.15);
+    border-radius: 15px;
+    background-image: url("../assets/img/login-bg.svg");
+
+    .login__title {
+        display: flex;
+        flex-direction: column;
+        height: 41px;
+
+        p {
+            margin: 0;
+            font-size: 32px;
+            font-weight: bold;
+            line-height: 38px;
+        }
+
+        .underline {
+            height: 3px;
+            width: 36px;
+            margin-left: 2px;
+        }
+    }
+
+    .login__subtitle {
+        margin-top: 15px;
+        margin-bottom: 30px;
+        font-size: 16px;
+        line-height: 20px;
+        color: #727272;
+    }
 }
 </style>

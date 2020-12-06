@@ -3,9 +3,9 @@
     "loading": "Loading...",
     "login": {
         "title": "Login",
-        "forgot_password": "Forgot password ?",
-        "contact_admin": "Contact the administrator",
-        "username": "User Name",
+        "welcome": "Welcome to",
+        "enter_credentials": "Enter your credentials to continue",
+        "username": "Username",
         "password": "Password",
         "login_button": "Login"
     },
