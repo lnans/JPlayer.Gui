@@ -21,13 +21,13 @@ const routes = [
     children: [
       {
         path: "",
-        name: "dashboard",
-        component: () => import("@/views/Dashboard.vue"),
+        name: "index",
+        component: () => import("@/views/Index.vue"),
       },
       {
         path: "admin",
         name: "admin",
-        component: () => import("@/views/Admin.vue"),
+        component: () => import("@/views/Admin/Index.vue"),
       },
     ],
   },

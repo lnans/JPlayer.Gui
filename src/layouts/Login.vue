@@ -1,57 +1,19 @@
-<template>
-  <v-app>
-    <v-main>
-      <v-container fluid class="container__login pa-0">
-        <div class="login">
-          <div class="login__title">
-            <p>Login</p>
-            <div class="underline primary"></div>
-          </div>
-          <p class="login__subtitle">
-            {{ $t("login.welcome") }} <b>{{ $t("app_name") }}</b
-            ><br />{{ $t("login.enter_credentials") }}
-          </p>
-          <v-form ref="loginForm" v-model="valid" :disabled="loading">
-            <v-text-field
-              outlined
-              v-model="loginForm.login"
-              :height="45"
-              :label="$t('login.username')"
-              append-icon="fa-user"
-              :rules="[rules.required]"
-              @keyup.enter="submit()"
-            >
-            </v-text-field>
-            <v-text-field
-              outlined
-              v-model="loginForm.password"
-              :label="$t('login.password')"
-              :append-icon="showPwd ? 'fa-eye' : 'fa-eye-slash'"
-              :type="showPwd ? 'text' : 'password'"
-              :rules="[rules.required]"
-              @click:append="showPwd = !showPwd"
-              @keyup.enter="submit()"
-            >
-            </v-text-field>
-            <v-btn
-              large
-              elevation="0"
-              class="login__btn"
-              color="primary"
-              height="45px"
-              width="100%"
-              :disabled="!valid"
-              :loading="loading"
-              @click="submit()"
-            >
-              {{ $t("login.login_button") }}
-            </v-btn>
-          </v-form>
-        </div>
-      </v-container>
-      <Toaster />
-    </v-main>
-  </v-app>
+<template lang="pug">
+  v-app
+    v-main
+      v-container.container__login.pa-0(fluid)
+        div.login
+          div.login__title
+            p Login
+            div.underline.primary
+          p.login__subtitle {{ $t("login.welcome") }} <b> {{ $t("app_name") }} </b> <br /> {{ $t("login.enter_credentials") }}
+          v-form(ref="loginForm" v-model="valid" :disabled="loading")
+            v-text-field(outlined v-model="loginForm.login" :height="45" :label="$t('login.username')" append-icon="fa-user" :rules="[rules.required]" @keyup.enter="submit()")
+            v-text-field(outlined v-model="loginForm.password" :label="$t('login.password')" :append-icon="showPwd ? 'fa-eye' : 'fa-eye-slash'" :type="showPwd ? 'text' : 'password'" :rules="[rules.required]" @click:append="showPwd = !showPwd" @keyup.enter="submit()")
+            v-btn.login__btn(large elevation="0" color="primary" height="45px" width="100%" :disabled="!valid" :loading="loading" @click="submit()") {{ $t("login.login_button") }}
+
+      Toaster
+
 </template>
 
 <script>
