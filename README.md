@@ -20,5 +20,10 @@ yarn build
 yarn lint
 ```
 
+### Install HTTPS for localhost
+* Install mkcert
+* copy certs/* to $(mkcert -CAROOT) directory
+* run mkcert -install
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
