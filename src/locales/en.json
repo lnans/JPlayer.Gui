@@ -1,33 +1,33 @@
 {
-    "app_name": "JPlayer",
-    "loading": "Loading...",
-    "login": {
-        "title": "Login",
-        "welcome": "Welcome to",
-        "enter_credentials": "Enter your credentials to continue",
-        "username": "Username",
-        "password": "Password",
-        "login_button": "Login"
-    },
-    "update_user_form": {
-        "title": "Password update",
-        "current_password": "Current password",
-        "new_password": "New password",
-        "retype_password": "Confirme the password",
-        "update_successfully": "Password updated"
-    },
-    "routes": {
-        "dashboard": "Dashboard",
-        "admin": "Administration"
-    },
-    "form": {
-        "validate": "Validate",
-        "save": "Save"
-    },
-    "rules": {
-        "required": "Required"
-    },
-    "authAuthenticationFailed": "Incorrect credentials",
-    "authWrongPassword": "Wrong password",
-    "networkError": "Unable to contact the server"
+  "app_name": "JPlayer",
+  "loading": "Loading...",
+  "login": {
+    "title": "Login",
+    "welcome": "Welcome to",
+    "enter_credentials": "Enter your credentials to continue",
+    "username": "Username",
+    "password": "Password",
+    "login_button": "Login"
+  },
+  "update_user_form": {
+    "title": "Password update",
+    "current_password": "Current password",
+    "new_password": "New password",
+    "retype_password": "Confirme the password",
+    "update_successfully": "Password updated"
+  },
+  "routes": {
+    "dashboard": "Dashboard",
+    "admin": "Administration"
+  },
+  "form": {
+    "validate": "Validate",
+    "save": "Save"
+  },
+  "rules": {
+    "required": "Required"
+  },
+  "authAuthenticationFailed": "Incorrect credentials",
+  "authWrongPassword": "Wrong password",
+  "networkError": "Unable to contact the server"
 }
