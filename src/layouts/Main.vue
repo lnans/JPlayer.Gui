@@ -1,45 +1,22 @@
 <template lang="pug">
-  router-view(:key="$route.fullPath")
+  v-app(v-else)
+    v-main
+      div.app__loader(v-if="!connected")
+        v-progress-circular(indeterminate color="primary" :width="7" :size="50")
+        p.pt-2 {{ $t('loading') }}
+      router-view(v-else :key="$route.fullPath")
 </template>
 
 <script>
-// import BreadCrumb from '../components/breadcrumb/BreadCrumb.vue'
 export default {
   name: "Main",
-  // components: { BreadCrumb },
   data() {
     return {
-      mini: null,
       connected: false,
-      updateUser: false,
-      updateUserForm: {
-        isLoading: false,
-        isValid: false,
-        showCurrentPassword: false,
-        showNewPassword: false,
-        showRetypePassword: false,
-        data: {
-          currentPassword: "",
-          newPassword: "",
-          retypePassword: "",
-        },
-        rules: {
-          required: (value) => !!value || this.$t("rules.required"),
-        },
-      },
-      menus: [
-        {
-          icon: "fa-home",
-          title: "Dashboard",
-          to: "/",
-        },
-        {
-          icon: "fa-tools",
-          title: "Administration",
-          to: "admin",
-        },
-      ],
     };
+  },
+  mounted () {
+    this.getUserInfo();
   },
   methods: {
     signOut() {
@@ -63,11 +40,6 @@ export default {
         this.connected = true;
       });
     },
-    closeUserForm() {
-      this.updateUserForm.data.currentPassword = "";
-      this.updateUserForm.data.newPassword = "";
-      this.updateUserForm.data.retypePassword = "";
-    },
   },
 };
 </script>
@@ -76,68 +48,14 @@ export default {
 #app_main {
   height: 100%;
 }
-// .app_navigation {
-//     min-width: 230px;
-//     // background-color: $app-components-bg-color;
-//     .app_title {
-//         height: 60px;
-//         text-align: center;
-//     }
-// }
-// .app_container {
-//     display: flex;
-//     width: 100%;
-//     flex-direction: column;
-//     .app_content {
-//         margin: 0;
-//     }
-//     .app_bar {
-//         display: flex;
-//         flex-direction: row;
-//         justify-content: space-between;
-//         height: 60px;
-//         width: 100%;
-//         // background-color: $app-components-bg-color;
-//         .app_breadcrumb {
-//             // color: $app-components-font-color;
-//             display: flex;
-//             flex-direction: column;
-//             justify-content: center;
-//             padding-left: 10px;
-//             width: auto;
-//         }
-//         .app_user {
-//             display: flex;
-//             width: 61px;
-//             .app_user__menu {
-//                 border-top-left-radius: 0;
-//                 border-top-right-radius: 0;
-//                 border-bottom-right-radius: 0;
-//             }
-//             .app_user__list {
-//                 // background-color: $app-components-bg-color;
-//                 padding: 0;
-//                 .app_user__list-item {
-//                     padding-right: 10px;
-//                     height: 60px;
-//                 }
-//                 .app_user__list-item--title {
-//                     // color: $app-components-font-color;
-//                     display: flex;
-//                     justify-content: flex-end;
-//                     .user_login {
-//                         margin: 0;
-//                         align-self: center;
-//                         font-weight: 600;
-//                         line-height: 10px;
-//                         padding-right: 10px;
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// }
-// .update_user_form {
-//     padding-top: 20px !important;
-// }
+.app__loader {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  p {
+    font-style: italic;
+  }
+}
 </style>

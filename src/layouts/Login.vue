@@ -25,7 +25,7 @@ export default {
     return {
       valid: false,
       showPwd: false,
-      loading: false,
+      loading: true,
       loginForm: {
         login: "",
         password: "",
@@ -35,19 +35,27 @@ export default {
       },
     };
   },
-  mounted() {
-    console.log(this);
-    console.log(this.$test);
+  mounted () {
+    this.check();
   },
   methods: {
-    submit() {
+    check () {
+      this.$http.get('auth')
+        .then(() => {
+          this.$router.push('/');
+        })
+        .catch(() => {
+          this.loading = false;
+        })
+    },
+    submit () {
       if (!this.valid) {
         this.$refs.loginForm.validate();
         return;
       }
       this.loading = true;
       this.$http
-        .post(`auth/signin`, this.loginForm)
+        .post('auth/signin', this.loginForm)
         .then((response) => {
           // Redirect to home
           this.$user.login = response.data.login;

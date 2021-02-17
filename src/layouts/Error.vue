@@ -5,8 +5,8 @@
         v-card(v-bind:class="`error-card rounded-0 col-3 col-${$breakpoint}-3 align-self-center align-self-${$breakpoint}-center`" :dark="$vuetify.theme.isDark" :elevation="1")
           v-card-text.d-flex.flex-column.align-content-center
             v-icon.pa-5(:size="40") fa-exclamation-triangle
-            p(v-bind:class="`text-center text-h6 text-${$breakpoint}-h6 ma-0`") Oops ! something went wrong...
-            p.text-center.pa-0 Maybe the application is under maintenance
+            p(v-bind:class="`text-center text-h6 text-${$breakpoint}-h6 ma-0`") {{ $t('error.something_wrong') }}
+            p.text-center.pa-0 {{ $t('error.under_maintenance') }}
 </template>
 
 <script>
