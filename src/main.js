@@ -6,6 +6,7 @@ import './plugins/axios'
 import i18n from './plugins/i18n'
 import vuetify from './plugins/vuetify'
 import router from './plugins/router'
+import './plugins/mixins'
 
 // Import services
 import ToasterService from './components/toaster/ToasterService'

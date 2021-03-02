@@ -21,7 +21,7 @@ const routes = [
     children: [
       {
         path: "",
-        name: "index",
+        name: "dashboard",
         component: () => import("@/views/Index.vue"),
       },
       {

@@ -2,7 +2,7 @@
   v-app
     v-main
       v-container.container__login.pa-0(fluid)
-        div.login
+        div.login(:class="isDark ? 'login--dark' : ''")
           div.login__title
             p Login
             div.underline.primary
@@ -112,6 +112,13 @@ export default {
     font-size: 16px;
     line-height: 20px;
     color: #727272;
+  }
+}
+
+.login--dark {
+  border: solid 1px #363636;
+  .login__title {
+    opacity: 0.8;
   }
 }
 </style>

@@ -13,12 +13,9 @@
     "something_wrong": "Oops ! something went wrong...",
     "under_maintenance": "Maybe the application is under maintenance"
   },
-  "update_user_form": {
-    "title": "Password update",
-    "current_password": "Current password",
-    "new_password": "New password",
-    "retype_password": "Confirme the password",
-    "update_successfully": "Password updated"
+  "router": {
+    "dashboard": "Dashboard",
+    "admin": "Administration"
   },
   "form": {
     "validate": "Validate",
@@ -27,7 +24,20 @@
   "rules": {
     "required": "Required"
   },
-  "authAuthenticationFailed": "Incorrect credentials",
-  "authWrongPassword": "Wrong password",
-  "networkError": "Unable to contact the server"
+  "auth_authentication_failed": "Incorrect credentials",
+  "auth_wrong_password": "Wrong password",
+  "update_user_form": {
+    "title": "Password update",
+    "current_password": "Current password",
+    "new_password": "New password",
+    "retype_password": "Confirme the password",
+    "update_successfully": "Password updated"
+  },
+  "parameter": {
+    "dark_mode": "Dark mode"
+  },
+  "menu": {
+    "dashboard": "Dashboard",
+    "administration": "Administration"
+  }
 }

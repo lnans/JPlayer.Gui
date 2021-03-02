@@ -38,7 +38,7 @@ _axios.interceptors.response.use(
     // In case of 401, redirect to login page
     // If the error come from the login page, display the error
     const errCode = error.response.data.error;
-    if (error.response.status === 401 && errCode === "authNotAuthenticated") {
+    if (error.response.status === 401 && errCode === "auth_not_authenticated") {
       if (window.location.pathname !== process.env.VUE_APP_LOGIN_PAGE)
         window.location = process.env.VUE_APP_LOGIN_PAGE;
     } else {
