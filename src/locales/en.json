@@ -39,5 +39,8 @@
   "menu": {
     "dashboard": "Dashboard",
     "administration": "Administration"
+  },
+  "app_bar": {
+    "sign_out": "Your are about to log out"
   }
 }

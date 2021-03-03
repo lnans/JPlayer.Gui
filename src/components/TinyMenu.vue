@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-menu(:close-on-content-click="false" transition="slide-y-transition" bottom offset-y)
+  v-menu(:close-on-content-click="false" transition="slide-y-transition" offset-y)
     template(v-slot:activator="{ on, attrs }")
       v-btn.mt-2.mx-2(v-bind="attrs" v-on="on" icon)
         v-icon {{ icon }}
