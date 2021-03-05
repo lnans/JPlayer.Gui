@@ -18,7 +18,6 @@
     "admin": "Administration"
   },
   "form": {
-    "validate": "Validate",
     "save": "Save"
   },
   "rules": {
@@ -26,11 +25,13 @@
   },
   "auth_authentication_failed": "Incorrect credentials",
   "auth_wrong_password": "Wrong password",
-  "update_user_form": {
-    "title": "Password update",
+  "auth_password_not_same": "New password and retype password must be the same",
+  "request_validation_error": "Request validation error",
+  "credentials_form": {
+    "title": "Update my credentials",
     "current_password": "Current password",
     "new_password": "New password",
-    "retype_password": "Confirme the password",
+    "retype_password": "Confirm password",
     "update_successfully": "Password updated"
   },
   "parameter": {
@@ -41,6 +42,7 @@
     "administration": "Administration"
   },
   "app_bar": {
-    "sign_out": "Your are about to log out"
+    "sign_out": "Sign out",
+    "sign_out_label": "Your are about to log out"
   }
 }

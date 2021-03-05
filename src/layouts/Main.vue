@@ -1,90 +1,162 @@
 <template lang="pug">
-  v-app
+v-app
+  // Navigation Menu
+  v-navigation-drawer.nav-drawer(
+    v-model="drawer",
+    v-if="connected",
+    app,
+    :color="isDark ? '' : 'primary'"
+  )
+    // Title
+    .nav-drawer__title.white--text
+      p {{ $t('app_name') }}
 
-    // Navigation Menu
-    v-navigation-drawer.nav-drawer(v-model="drawer" v-if="connected" app :color="isDark ? '' : 'primary'")
+    v-divider.nav-drawer__divider(horizontal)
 
-      // Title
-      div.nav-drawer__title.white--text
-        p {{ $t('app_name') }}
+    // Menu items
+    v-list.nav-drawer__menu-list.pt-8(nav)
+      v-list-item-group
+        v-list-item.menu-list__item(
+          v-for="(item, idx) in displayableMenuItems",
+          :key="idx",
+          :to="item.to"
+        )
+          .menu-list__pin
+          v-list-item-icon.menu-list__icon
+            v-icon.white--text {{ item.icon }}
+          v-list-item-title.menu-list__title.white--text {{ $t(item.title) }}
 
-      v-divider.nav-drawer__divider(horizontal)
+    v-spacer
 
-      // Menu items
-      v-list.nav-drawer__menu-list.pt-8(nav)
-        v-list-item-group
-          v-list-item.menu-list__item(v-for="(item, idx) in menuItems" :key="idx" :to="item.to")
-            div.menu-list__pin
-            v-list-item-icon.menu-list__icon
-              v-icon.white--text {{ item.icon }}
-            v-list-item-title.menu-list__title.white--text {{ $t(item.title) }}
+    // User profile
+    v-btn.nav-drawer__user(
+      elevation="0",
+      height="80",
+      @click="formState.display = true"
+    )
+      .nav-drawer__user-content.white--text
+        v-avatar.mx-6(size="45", color="grey") {{ $user.login[0] }}
+        span {{ $user.login }}
 
-      v-spacer
+  // App bar
+  v-app-bar.app__bar(
+    v-if="connected",
+    app,
+    elevation="0",
+    :style="{ backgroundColor: isDark ? '#121212' : '#FFFFFF' }"
+  )
+    v-app-bar-nav-icon(@click="drawer = !drawer")
+    v-toolbar-title.app__bar-title {{ $t(`router.${$route.name}`) }}
+    v-spacer
 
-      // User profile
-      v-btn.nav-drawer__user(elevation="0" height="80")
-        div.nav-drawer__user-content.white--text
-          v-avatar.mx-6(size="45" color="grey") {{ $user.login[0] }}
-          span {{ $user.login }}
+    // Notifications
+    v-btn.mt-2.mx-2(icon)
+      v-icon far fa-bell
 
-    // App bar
-    v-app-bar.app__bar(v-if="connected" app elevation="0" :style="{ backgroundColor: isDark ? '#121212' : '#FFFFFF' }")
-      v-app-bar-nav-icon(@click="drawer = !drawer")
-      v-toolbar-title.app__bar-title {{ $t(`router.${$route.name}`) }}
-      v-spacer
+    // Parameters
+    TinyMenu(icon="fa-cog")
+      template(v-slot:content)
+        v-row.ma-0.pl-5.pr-1.justify-space-between
+          p.my-auto {{ $t('parameter.dark_mode') }}
+          v-switch.ma-0.pa-0(
+            v-model="$vuetify.theme.dark",
+            inset,
+            hide-details,
+            @change="themeChange()",
+            :ripple="false"
+          )
 
-      // Notifications
-      v-btn.mt-2.mx-2(icon)
-        v-icon far fa-bell
+    // Logout
+    v-btn.mt-2.mx-2(icon, @click="signOutDialog = true")
+      v-icon fa-power-off
 
-      // Parameters
-      TinyMenu(icon="fa-cog")
-        template(v-slot:content)
-          v-row.ma-0.pl-5.pr-1.justify-space-between
-            p.my-auto {{ $t('parameter.dark_mode') }}
-            v-switch.ma-0.pa-0(v-model="$vuetify.theme.dark" inset hide-details @change="themeChange()" :ripple="false")
+  // Content
+  v-main
+    v-container.pa-8(v-if="connected", fluid)
+      v-slide-x-transition(hide-on-leave)
+        router-view(:key="$route.fullPath")
+    .app__loader(v-else)
+      v-progress-circular(
+        indeterminate,
+        color="primary",
+        :width="7",
+        :size="50"
+      )
+      p.pt-2 {{ $t('loading') }}
 
-      // Logout
-      v-btn.mt-2.mx-2(icon @click="signOutDialog = true")
-        v-icon fa-power-off
+  // Sign Out dialog
+  v-dialog(v-model="signOutDialog", max-width="250")
+    v-card
+      v-card-text.text-align-center.bold.pa-0.pt-5 {{ $t('app_bar.sign_out_label') }}
+      v-card-actions
+        v-spacer
+        v-btn(color="red", text, @click="signOut()") {{ $t('app_bar.sign_out') }}
 
-    // Content
-    v-main
-      v-container.pa-8(v-if="connected" fluid)
-        v-slide-x-transition(hide-on-leave)
-          router-view(:key="$route.fullPath")
-      div.app__loader(v-else)
-        v-progress-circular(indeterminate color="primary" :width="7" :size="50")
-        p.pt-2 {{ $t('loading') }}
+  // User profile form
+  Dialog(
+    v-model="formState",
+    :title="$t('credentials_form.title')",
+    width="350"
+  )
+    template(v-slot:content)
+      Form(
+        v-model="formState",
+        :contract="formContract",
+        href="auth/updatecredentials",
+        method="put"
+      )
 
-    // Sign Out dialog
-    v-dialog(v-model="signOutDialog" max-width="250")
-      v-card
-        v-card-text.text-align-center.bold.pa-0.pt-5 {{ $t('app_bar.sign_out') }}
-        v-card-actions
-          v-spacer
-          v-btn(color="red" text @click="signOut()") Sign out
+  Toaster
 </template>
 
 <script>
-import TinyMenu from '@/components/TinyMenu.vue'
-const availableMenuItems = [
-  { key: 'dashboard', title: 'menu.dashboard', to: '/', icon: 'fa-home' },
-  { key: 'administration', title: 'menu.administration', to: '/admin', icon: 'fa-tools' }
-]
+import Toaster from "@/components/toaster/Toaster.vue";
+import TinyMenu from "@/components/TinyMenu.vue";
+import Form from "@/components/Form.vue";
+import Dialog from "@/components/Dialog.vue";
+
 export default {
   name: "Main",
-  components: { TinyMenu },
+  components: { Toaster, TinyMenu, Form, Dialog },
   data() {
     return {
-      availableMenuItems,
+      formState: { display: false, loading: false, valid: false },
+      formContract: [
+        {
+          name: "currentPassword",
+          label: "credentials_form.current_password",
+          type: "password",
+          rule: "required",
+        },
+        {
+          name: "newPassword",
+          label: "credentials_form.new_password",
+          type: "password",
+          rule: "required",
+        },
+        {
+          name: "retypePassword",
+          label: "credentials_form.retype_password",
+          type: "password",
+          rule: "required",
+        },
+      ],
+      availableMenuItems: [
+        { key: "dashboard", title: "menu.dashboard", to: "/", icon: "fa-home" },
+        {
+          key: "administration",
+          title: "menu.administration",
+          to: "/admin",
+          icon: "fa-tools",
+        },
+      ],
+      displayableMenuItems: [],
       connected: false,
       drawer: true,
       signOutDialog: false,
-      menuItems: []
     };
   },
-  async mounted () {
+  async mounted() {
     await this.getUserInfo();
     await this.getMenuItems();
     this.connected = true;
@@ -96,14 +168,6 @@ export default {
         this.$router.push("/login");
       });
     },
-    updateCredentials() {
-      this.$http
-        .put("auth/updatecredentials", this.updateUserForm.data)
-        .then(() => {
-          this.updateUser = false;
-          this.$toaster.success("update_user_form.update_successfully");
-        });
-    },
     async getUserInfo() {
       await this.$http.get("auth").then(async (response) => {
         this.$user.login = response.data.login;
@@ -111,13 +175,14 @@ export default {
       });
     },
     async getMenuItems() {
-      await this.$http.get("dashboard/menu")
-        .then(response => {
-          this.menuItems = this.availableMenuItems.filter(item => response.data.includes(item.key));
-        })
+      await this.$http.get("dashboard/menu").then((response) => {
+        this.displayableMenuItems = this.availableMenuItems.filter((item) =>
+          response.data.includes(item.key)
+        );
+      });
     },
     themeChange() {
-      window.localStorage.setItem('dark', this.$vuetify.theme.dark)
+      window.localStorage.setItem("dark", this.$vuetify.theme.dark);
     },
   },
 };
@@ -160,7 +225,7 @@ export default {
   .nav-drawer__divider {
     width: 80%;
     margin: 0 auto;
-    background-color: rgba(255,255,255,0.4);
+    background-color: rgba(255, 255, 255, 0.4);
   }
   ::v-deep .v-navigation-drawer__content {
     display: flex;
@@ -171,7 +236,7 @@ export default {
     padding-right: 0;
 
     .menu-list__item.v-item--active .menu-list__pin {
-      background-color: rgba(255,255,255,0.5);
+      background-color: rgba(255, 255, 255, 0.5);
     }
 
     .menu-list__item {
@@ -200,7 +265,7 @@ export default {
     }
   }
   .nav-drawer__user {
-    background-color: rgba(0,0,0,0.1) !important;
+    background-color: rgba(0, 0, 0, 0.1) !important;
     border-radius: 0 !important;
     text-transform: none;
     font-weight: bold;

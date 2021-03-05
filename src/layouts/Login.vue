@@ -1,70 +1,71 @@
 <template lang="pug">
-  v-app
-    v-main
-      v-container.container__login.pa-0(fluid)
-        div.login(:class="isDark ? 'login--dark' : ''")
-          div.login__title
-            p Login
-            div.underline.primary
-          p.login__subtitle {{ $t("login.welcome") }} <b> {{ $t("app_name") }} </b> <br /> {{ $t("login.enter_credentials") }}
-          v-form(ref="loginForm" v-model="valid" :disabled="loading")
-            v-text-field(outlined v-model="loginForm.login" :height="45" :label="$t('login.username')" append-icon="fa-user" :rules="[rules.required]" @keyup.enter="submit()")
-            v-text-field(outlined v-model="loginForm.password" :label="$t('login.password')" :append-icon="showPwd ? 'fa-eye' : 'fa-eye-slash'" :type="showPwd ? 'text' : 'password'" :rules="[rules.required]" @click:append="showPwd = !showPwd" @keyup.enter="submit()")
-            v-btn.login__btn(large elevation="0" color="primary" height="45px" width="100%" :disabled="!valid" :loading="loading" @click="submit()") {{ $t("login.login_button") }}
+v-app
+  v-main
+    v-container.container__login.pa-0(fluid)
+      .login(:class="isDark ? 'login--dark' : ''")
+        .login__title
+          p Login
+          .underline.primary
+        p.login__subtitle {{ $t('login.welcome') }} <b> {{ $t('app_name') }} </b> <br /> {{ $t('login.enter_credentials') }}
+        Form(
+          v-model="formState",
+          :contract="formContract",
+          href="auth/signin",
+          method="post",
+          validateLabel="login.login_button",
+          validateWidth="100%",
+          @onSuccess="onSuccess($event)"
+        )
 
-      Toaster
-
+    Toaster
 </template>
 
 <script>
-import Toaster from "../components/toaster/Toaster.vue";
+import Toaster from "@/components/toaster/Toaster.vue";
+import Form from "@/components/Form.vue";
+
 export default {
-  components: { Toaster },
+  components: { Toaster, Form },
   name: "Login",
   data() {
     return {
-      valid: false,
-      showPwd: false,
-      loading: true,
-      loginForm: {
-        login: "",
-        password: "",
-      },
-      rules: {
-        required: (value) => !!value || this.$t("rules.required"),
-      },
+      formState: { loading: false },
+      formContract: [
+        {
+          name: "login",
+          label: "login.username",
+          type: "text",
+          icon: "fa-user",
+          rule: "required",
+        },
+        {
+          name: "password",
+          label: "login.password",
+          type: "password",
+          rule: "required",
+        },
+      ],
     };
   },
-  mounted () {
+  mounted() {
     this.check();
   },
   methods: {
-    check () {
-      this.$http.get('auth')
-        .then(() => {
-          this.$router.push('/');
-        })
-        .catch(() => {
-          this.loading = false;
-        })
-    },
-    submit () {
-      if (!this.valid) {
-        this.$refs.loginForm.validate();
-        return;
-      }
-      this.loading = true;
+    check() {
       this.$http
-        .post('auth/signin', this.loginForm)
-        .then((response) => {
-          // Redirect to home
-          this.$user.login = response.data.login;
-          this.$user.functions = response.data.functions;
+        .get("auth")
+        .then(() => {
           this.$router.push("/");
         })
         .catch(() => {
           this.loading = false;
         });
+    },
+    onSuccess(response) {
+      // Redirect to home
+      this.$user.login = response.data.login;
+      this.$user.functions = response.data.functions;
+      this.$router.push("/");
     },
   },
 };
