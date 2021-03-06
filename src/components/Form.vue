@@ -34,7 +34,7 @@
       )
 
   // Validate button
-  v-btn(
+  v-btn.mt-3(
     large,
     height="45",
     :width="validateWidth",
