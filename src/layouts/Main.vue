@@ -103,7 +103,8 @@ v-app
         v-model="formState",
         :contract="formContract",
         href="auth/updatecredentials",
-        method="put"
+        method="put",
+        @onSuccess="onUpdateCredsSuccess($event)"
       )
 
   Toaster
@@ -183,6 +184,9 @@ export default {
     },
     themeChange() {
       window.localStorage.setItem("dark", this.$vuetify.theme.dark);
+    },
+    onUpdateCredsSuccess() {
+      this.$toaster.success("credentials_form.update_successfully");
     },
   },
 };

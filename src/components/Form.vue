@@ -93,7 +93,6 @@ export default {
       this.$http
         .request({ url: this.href, method: this.method, data: this.data })
         .then((response) => {
-          this.$toaster.success("credentials_form.update_successfully");
           this.updateModel("loading", false);
           this.updateModel("display", false);
           this.$refs.form.reset();
