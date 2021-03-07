@@ -44,5 +44,12 @@
   "app_bar": {
     "sign_out": "Sign out",
     "sign_out_label": "Your are about to log out"
+  },
+  "administration": {
+    "tiles": {
+      "user_tile_label": "Users",
+      "profile_tile_label": "Profiles",
+      "function_tile_label": "Functions"
+    }
   }
 }

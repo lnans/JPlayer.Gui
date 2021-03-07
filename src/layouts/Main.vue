@@ -72,7 +72,7 @@ v-app
 
   // Content
   v-main
-    v-container.pa-8(v-if="connected", fluid)
+    v-container.app__content(v-if="connected", fluid)
       v-slide-x-transition(hide-on-leave)
         router-view(:key="$route.fullPath")
     .app__loader(v-else)
@@ -194,6 +194,10 @@ export default {
 
 <style lang="scss" scoped>
 #app_main {
+  height: 100%;
+}
+.app__content {
+  padding: 30px 30px 0 30px;
   height: 100%;
 }
 .app__loader {
