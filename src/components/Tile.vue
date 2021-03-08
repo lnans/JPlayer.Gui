@@ -1,5 +1,5 @@
 <template lang="pug">
-v-card.tile(width="250", min-width="250", height="130", min-height="130" :to="to")
+v-card.tile(width="300", min-width="250", height="150", min-height="130" :to="to")
   v-card-title.tile__title {{ title }}
   v-card-text.tile__content
     p.tile__count {{ count }}

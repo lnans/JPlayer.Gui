@@ -29,6 +29,11 @@ const routes = [
         name: "admin",
         component: () => import("@/views/Admin/Index.vue"),
       },
+      {
+        path: "admin/users",
+        name: "users",
+        component: () => import("@/views/Admin/Users/Index.vue"),
+      }
     ],
   },
 ];

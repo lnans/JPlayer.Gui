@@ -6,6 +6,7 @@ v-container.main__content
     :title="$t(`administration.tiles.${tile.label}`)",
     :count="tile.count",
     :icon="availableTiles[tile.label].icon"
+    :to="availableTiles[tile.label].to"
   )
 </template>
 
@@ -18,7 +19,7 @@ export default {
     return {
       tiles: [],
       availableTiles: {
-        user_tile_label: { to: "", icon: "fa-user" },
+        user_tile_label: { to: "admin/users", icon: "fa-user" },
         profile_tile_label: { to: "", icon: "far fa-address-card" },
         function_tile_label: { to: "", icon: "fa-cogs" },
       },
