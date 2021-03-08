@@ -15,7 +15,8 @@
   },
   "router": {
     "dashboard": "Dashboard",
-    "admin": "Administration"
+    "admin": "Administration",
+    "users": "Users"
   },
   "form": {
     "save": "Save"
@@ -50,6 +51,20 @@
       "user_tile_label": "Users",
       "profile_tile_label": "Profiles",
       "function_tile_label": "Functions"
+    },
+    "users": {
+      "user_list": "Users list",
+      "form": {
+        "login": "Login",
+        "password": "Password",
+        "profiles": "Profiles"
+      },
+      "data_table": {
+        "login": "Login",
+        "deactivated": "Deactivated",
+        "creation_date": "Creation Date",
+        "read_only": "Read only"
+      }
     }
   }
 }
